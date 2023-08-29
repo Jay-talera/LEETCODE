@@ -1,1 +1,1 @@
-select w1.id from weather w1,weather w2 where datediff(w1.recordDate,w2.recordDate)=1 and w1.temperature>w2.temperature order by w1.id
+select w2.id from weather w1 join weather w2 on w2.temperature>w1.temperature and datediff(w2.recordDate,w1.recordDate)=1 order by w2.id
