@@ -9,14 +9,16 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        d=dict()
-        def deep_copy(node):
-            if not node:
-                return
-            if node in d:
-                return d[node]
-            d[node]=new=Node(node.val)
-            new.next=deep_copy(node.next)
-            new.random=deep_copy(node.random)
-            return new
-        return deep_copy(head)
+        d={None:None}
+        cur=head
+        while cur:
+            copy=Node(cur.val)
+            d[cur]=copy
+            cur=cur.next
+        cur=head
+        while cur:
+            copy=d[cur]
+            copy.next=d[cur.next]
+            copy.random=d[cur.random]
+            cur=cur.next
+        return d[head]
