@@ -1,0 +1,1 @@
+select * from patients where conditions regexp '\\bDIAB1'
