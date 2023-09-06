@@ -1,2 +1,12 @@
-select distinct employee_id
-from employees where manager_id not in (select distinct employee_id from employees) and salary<30000 order by employee_id
+SELECT 
+    DISTINCT emp.employee_id
+FROM
+    employees emp
+LEFT JOIN
+    employees mng ON emp.manager_id = mng.employee_id
+WHERE
+    emp.manager_id IS NOT NULL
+    AND emp.salary < 30000
+    AND mng.employee_id IS NULL
+ORDER BY 
+    emp.employee_id 
