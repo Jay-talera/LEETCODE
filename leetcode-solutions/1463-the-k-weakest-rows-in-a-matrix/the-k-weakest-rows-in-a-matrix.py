@@ -1,15 +1,20 @@
 class Solution:
     def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
-        sums = []
-        for index, row in enumerate(mat):
-            sums.append((sum(row), index))
-    
-        sorted_sums = sorted(sums)
+
+        arr = []
+        for r in range(len(mat)):
+            total = 0
+            for c in range(len(mat[r])):
+                total += mat[r][c]
+            arr.append([total,r])
         
-        k_rows = sorted_sums[:k]
+        heapq.heapify(arr)
 
         res = []
-        for val in k_rows:
-            res.append(val[1])
-
+        while k > 0:
+            _,row = heapq.heappop(arr)
+            res.append(row)
+            k-=1
         return res
+
+        
